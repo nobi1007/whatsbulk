@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo '1. ---- installing python3 ----'
+echo -e ' \n ---- Installing python3.9 ---- \n'
 brew install python3
 
-echo '2. ---- creating virtualenv and activating it----'
+echo -e '\n ---- Creating virtualenv and activating it ---- \n'
 virtualenv whatsbulk-venv 
 source whatsbulk-venv/bin/activate
 
-echo '3. ---- installing dependencies ----'
+echo -e '\n ---- Installing dependencies ----\n'
 pip install -r requirements.txt
 
-echo '4. ---- Success, now you can run start.sh ----'
+echo -e '\n ---- Success, now you can run start.sh ----\n'
