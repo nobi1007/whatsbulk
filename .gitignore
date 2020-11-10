@@ -1,0 +1,5 @@
+.vscode
+.env
+whatsbulk-env/
+app/__pycache__/
+app/geckodriver.log
