@@ -1,7 +1,8 @@
+import sys
+import os
+import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time
-import sys
 from PyQt5.QtWidgets import QMainWindow, QLabel, QLineEdit, QPushButton, QApplication, QTextEdit, QFileDialog
 from PyQt5 import QtGui as qt
 from PyQt5 import QtCore as qtc
@@ -15,7 +16,7 @@ class Window(QMainWindow):
         self.mediaFilePath = ""
         self.setWindowTitle("WhatsBulk")
         self.setStyleSheet("background-color:white;")
-        self.setWindowIcon(qt.QIcon("logo.ico"))
+        self.setWindowIcon(qt.QIcon(os.getcwd() + "/../assets/logo.ico"))
 
         # recipient's name section
         self.lbl_name = QLabel("Recipient's Name: ", self)
@@ -90,7 +91,6 @@ class Window(QMainWindow):
             time.sleep(20)
 
             for user in names:
-
                 searchEle = driver.find_element_by_xpath(searchNameXPath)
                 searchEle.clear()
                 searchEle.send_keys(user)
