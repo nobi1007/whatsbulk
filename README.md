@@ -1,5 +1,7 @@
 # whatsbulk
 
+> A desktop app for sending messages (text/media) in **bulk** too.
+
 ### Requirements
 1. System -> Mac (tested)
 2. WebBrowser -> Mozilla Firefox (supported)
