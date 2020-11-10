@@ -2,7 +2,7 @@
 
 ### Steps to setup (only mac for now), copy and paste the following code in terminal:
 1. ``` 
-       git clone https://github.com/nobi1007/whatsbulk.git && cd whatsbulk ```
+       git clone https://github.com/nobi1007/whatsbulk.git && cd whatsbulk
    ```
 
 2. ``` 
