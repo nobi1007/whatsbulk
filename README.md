@@ -1,6 +1,6 @@
 # whatsbulk
 
-> A desktop app for sending messages (text/media) in **bulk** too.
+> A desktop app for sending messages (text/media) in **bulk** too via WhatsApp.
 
 ### Requirements
 1. System -> Mac (tested)
