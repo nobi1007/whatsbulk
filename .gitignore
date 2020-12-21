@@ -3,3 +3,4 @@
 whatsbulk-env/
 app/__pycache__/
 app/geckodriver.log
+**/.DS_Store

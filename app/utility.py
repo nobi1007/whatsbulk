@@ -7,7 +7,7 @@ def getDriver(driver):
 
     cdPath = os.getcwd()
     if driver == "Firefox":
-        cdPath += "/../WebDrivers/firefox"
+        cdPath += "/WebDrivers/firefox"
         if system == "Darwin":
             cdPath += "/mac/geckodriver"
         elif system == "Windows":
@@ -16,7 +16,7 @@ def getDriver(driver):
             cdPath += "/linux/geckodriver"
 
     elif driver == "Chrome":
-        cdPath += "/../WebDrivers/chrome"
+        cdPath += "/WebDrivers/chrome"
         if system == "Darwin":
             cdPath += "/mac/chromedriver"
         elif system == "Windows":
