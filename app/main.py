@@ -3,11 +3,26 @@ import os
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from PyQt5.QtWidgets import QMainWindow, QLabel, QLineEdit, QPushButton, QApplication, QTextEdit, QFileDialog
+from PyQt5.QtWidgets import (
+    QMainWindow,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QApplication,
+    QTextEdit,
+    QFileDialog,
+)
 from PyQt5 import QtGui as qt
 from PyQt5 import QtCore as qtc
 from utility import getDriver, formatToSendMessage, formatNames
-from xpaths import searchNameXPath, writeMessageXPath, singleUploadMediaXPath, multipleUploadMediaXPath, attachButtonXPath, sendMultiMediaXPath
+from xpaths import (
+    searchNameXPath,
+    writeMessageXPath,
+    singleUploadMediaXPath,
+    multipleUploadMediaXPath,
+    attachButtonXPath,
+    sendMultiMediaXPath,
+)
 
 
 class Window(QMainWindow):
@@ -36,8 +51,7 @@ class Window(QMainWindow):
         fileBtn = QPushButton("Upload File", self)
         fileBtn.clicked.connect(self.fileBtnClicked)
         fileBtn.move(200, 200)
-        self.uploaded_file = QLabel(
-            " --- No file selected --- ", self)
+        self.uploaded_file = QLabel(" --- No file selected --- ", self)
         self.uploaded_file.setGeometry(qtc.QRect(320, 200, 550, 30))
 
         # media caption section
@@ -63,7 +77,11 @@ class Window(QMainWindow):
 
     def fileBtnClicked(self):
         fname = QFileDialog.getOpenFileName(
-            self, 'Open file', '/Users/nobi1007/Desktop', "Image files (*.jpg *.gif *.png *.jpeg)")
+            self,
+            "Open file",
+            "/Users/nobi1007/Desktop",
+            "Image files (*.jpg *.gif *.png *.jpeg)",
+        )
         self.mediaFilePath = fname[0]
         self.uploaded_file.setText(self.mediaFilePath)
 
@@ -75,19 +93,21 @@ class Window(QMainWindow):
         toSendMessage = message.split("\n")
         toSendMessage = formatToSendMessage(toSendMessage)
 
-        if "".join(names).strip() and ("".join(self.mediaFilePath).strip() or "".join(toSendMessage).strip()):
+        if "".join(names).strip() and (
+            "".join(self.mediaFilePath).strip() or "".join(toSendMessage).strip()
+        ):
             self.statusBar().showMessage("")
             toBePrinted += "%d \n\n" % (len(names))
             toBePrinted += "Recepients : \n"
             for i in range(len(names)):
-                toBePrinted += "%d. %s,  " % (i+1, names[i])
+                toBePrinted += "%d. %s,  " % (i + 1, names[i])
             toBePrinted += "\n\nMessage : \n"
             toBePrinted += message
 
             driver = webdriver.Firefox(executable_path=getDriver("Firefox"))
             driver.set_window_position(0, 0)
             driver.set_window_size(564, 768)
-            driver.get('https://web.whatsapp.com')
+            driver.get("https://web.whatsapp.com")
             time.sleep(20)
 
             for user in names:
@@ -101,14 +121,15 @@ class Window(QMainWindow):
                     captionMsg = self.text_caption.toPlainText()
                     captionMsg = captionMsg.split("\n")
                     captionMsg = formatToSendMessage(captionMsg)
-                    attachBtnEle = driver.find_element_by_xpath(
-                        attachButtonXPath)
+                    attachBtnEle = driver.find_element_by_xpath(attachButtonXPath)
                     attachBtnEle.click()
 
                     inputMediaEle = driver.find_element_by_xpath(
-                        singleUploadMediaXPath)
+                        singleUploadMediaXPath
+                    )
                     driver.execute_script(
-                        "arguments[0].style.display = 'block';", inputMediaEle)
+                        "arguments[0].style.display = 'block';", inputMediaEle
+                    )
 
                     medias = [self.mediaFilePath]
 
@@ -116,16 +137,20 @@ class Window(QMainWindow):
                         media = medias[i]
                         if i > 0:
                             inputMediaEle = driver.find_element_by_xpath(
-                                multipleUploadMediaXPath)
+                                multipleUploadMediaXPath
+                            )
                             driver.execute_script(
-                                "arguments[0].style.display = 'block';", inputMediaEle)
+                                "arguments[0].style.display = 'block';",
+                                inputMediaEle,
+                            )
                         inputMediaEle.send_keys(media)
                         driver.implicitly_wait(2)
 
                     driver.implicitly_wait(1)
 
                     sendMultiMediaEle = driver.find_element_by_xpath(
-                        sendMultiMediaXPath)
+                        sendMultiMediaXPath
+                    )
                     sendMultiMediaEle.clear()
                     sendMultiMediaEle.send_keys()
                     for line in captionMsg:
@@ -158,4 +183,4 @@ app = QApplication(sys.argv)
 GUI = Window()
 app.exec_()
 sys.exit()
-app.exec_()  # this has to be added in mac and linux
+# app.exec_()  # this has to be added in mac and linux
