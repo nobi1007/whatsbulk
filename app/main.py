@@ -93,9 +93,7 @@ class Window(QMainWindow):
         toSendMessage = message.split("\n")
         toSendMessage = formatToSendMessage(toSendMessage)
 
-        if "".join(names).strip() and (
-            "".join(self.mediaFilePath).strip() or "".join(toSendMessage).strip()
-        ):
+        if "".join(names).strip() and ("".join(self.mediaFilePath).strip() or "".join(toSendMessage).strip()):
             self.statusBar().showMessage("")
             toBePrinted += "%d \n\n" % (len(names))
             toBePrinted += "Recepients : \n"
@@ -108,7 +106,7 @@ class Window(QMainWindow):
             driver.set_window_position(0, 0)
             driver.set_window_size(564, 768)
             driver.get("https://web.whatsapp.com")
-            time.sleep(20)
+            time.sleep(60)
 
             for user in names:
                 searchEle = driver.find_element_by_xpath(searchNameXPath)
@@ -124,21 +122,15 @@ class Window(QMainWindow):
                     attachBtnEle = driver.find_element_by_xpath(attachButtonXPath)
                     attachBtnEle.click()
 
-                    inputMediaEle = driver.find_element_by_xpath(
-                        singleUploadMediaXPath
-                    )
-                    driver.execute_script(
-                        "arguments[0].style.display = 'block';", inputMediaEle
-                    )
+                    inputMediaEle = driver.find_element_by_xpath(singleUploadMediaXPath)
+                    driver.execute_script("arguments[0].style.display = 'block';", inputMediaEle)
 
                     medias = [self.mediaFilePath]
 
                     for i in range(len(medias)):
                         media = medias[i]
                         if i > 0:
-                            inputMediaEle = driver.find_element_by_xpath(
-                                multipleUploadMediaXPath
-                            )
+                            inputMediaEle = driver.find_element_by_xpath(multipleUploadMediaXPath)
                             driver.execute_script(
                                 "arguments[0].style.display = 'block';",
                                 inputMediaEle,
@@ -148,9 +140,7 @@ class Window(QMainWindow):
 
                     driver.implicitly_wait(1)
 
-                    sendMultiMediaEle = driver.find_element_by_xpath(
-                        sendMultiMediaXPath
-                    )
+                    sendMultiMediaEle = driver.find_element_by_xpath(sendMultiMediaXPath)
                     sendMultiMediaEle.clear()
                     sendMultiMediaEle.send_keys()
                     for line in captionMsg:
